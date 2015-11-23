@@ -19,15 +19,15 @@
 
 <body>
     <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <![endif]-->
 
     <!-- Add your site or application content here -->
     <header class="wrapper">
         <img src="img/logo.png" alt="" class="logo center-vertical">
         <div class="center-vertical" id="right-panel">
             <a href="#" class="button" id="uploadButton"><i class="fa fa-cloud-upload" style="font-size:1.8em;"></i></a>
-            <a href="#" class="button">Sign in</a>
+            <a href="#" class="button" id="signinButton">Sign in</a>
         </div>
     </header>
 
@@ -36,71 +36,76 @@
             <i class="fa fa-arrow-right" style="position:absolute; right:0;top:50%;transform:translateY(-50%);font-size:20px; color:#3B3C3D;"></i>
         </nav>
 
-        <nav class="popup-wrapper" id="popupWindow">
+        <div class="popup-wrapper" id="popupUploadWindow">
             <div class="popup-close">
-                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closePopup"></div>
+                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeUploadPopup"></div>
             </div>
             <div class="popup-content">
                 <form action="uploadServlet" method="POST" enctype="multipart/form-data">
                     <input type="file" id="file" name="upload-image" multiple accept="image/*">
                     <!--<label for="file" class="upload-btn"></label>-->
-                    <input type="submit" value="Upload"/>
+                    <input type="submit" value="Upload" />
                 </form>
-                <p>Maximum file size: 10Mb</p>
+                <p>Maximum file size: 20Mb</p>
             </div>
-        </nav>
+        </div>
+
+        <div class="popup-wrapper" id="popupLoginWindow">
+            <div class="popup-close">
+                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeSigninPopup"></div>
+            </div>
+            <div class="popup-content">
+                <form action="loginServlet" method="post">
+                    <input type="text" id="username" placeholder="Username">
+                    <br>
+                    <input type="text" id="password" placeholder="Password" style="margin-top:5px;">
+                    <br>
+                    <center>
+                        <input type="submit" id="Login" value="Login" style="margin-top:10px;">
+                    </center>
+                </form>
+                <a style="margin-top:10px;text-decoration:none;cursor:pointer;" id="register">Register</a>
+            </div>
+        </div>
+
+        <div class="popup-wrapper" id="popupRegisterWindow">
+            <div class="popup-close">
+                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeRegisterPopup"></div>
+            </div>
+            <div class="popup-content">
+                <form action="">
+                    <input type="text" placeholder="Username">
+                    <br>
+                    <input type="text" placeholder="Password">
+                    <br>
+                    <input type="text" placeholder="Re-type password">
+                    <br>
+                    <center>
+                        <input type="submit" value="Register">
+                    </center>
+                </form>
+            </div>
+        </div>
 
         <section class="content-wrapper">
             <div class="row wrapper">
                 <div class="item"><img src="img/random1.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/random2.jpg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/random4.jpg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/random5.jpg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/random2.jpg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/random4.jpg" alt="" class="crop-img"></div>
+
             </div>
             <div class="row wrapper">
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
+
             </div>
 
             <div class="row wrapper">
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
+
             </div>
 
             <div class="row wrapper">
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
+
             </div>
 
             <div class="row wrapper">
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
-                <div class="item"><img src="img/doge.jpeg" alt="" class="crop-img"></div>
+
             </div>
         </section>
     </main>

@@ -374,6 +374,7 @@ nav.side:hover {
     overflow: hidden;
     position: relative;
     text-align: center;
+    cursor: pointer;
 }
 
 .crop-img {
