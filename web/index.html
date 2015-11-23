@@ -41,9 +41,10 @@
                 <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closePopup"></div>
             </div>
             <div class="popup-content">
-                <form action="imageSaving" method="post">
-                    <input type="image" id="file" class="input-file" multiple accept="image/*">
-                    <label for="file" class="upload-btn">Choose an image</label>
+                <form action="uploadServlet" method="POST" enctype="multipart/form-data">
+                    <input type="file" id="file" name="upload-image" multiple accept="image/*">
+                    <!--<label for="file" class="upload-btn"></label>-->
+                    <input type="submit" value="Upload"/>
                 </form>
                 <p>Maximum file size: 10Mb</p>
             </div>
