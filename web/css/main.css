@@ -382,6 +382,7 @@ nav.side:hover {
     position: relative;
     left: 100%;
     margin-left: -200%;
+    height:100%;
 }
 
 footer {

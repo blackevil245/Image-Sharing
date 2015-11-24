@@ -34,11 +34,34 @@ $("#closeRegisterPopup").click(function () {
 
 var minImgPerRow = 7;
 var maxImgPerRow = 9;
-var randomNum = Math.floor(Math.random() * (maxImgPerRow - minImgPerRow + 1)) + minImgPerRow;
+var randomNum;
+var row;
+var count;
 
 $(document).ready(function (i) {
     "use strict";
-    for (i = 1; i <= randomNum; i = i + 1) {
-        $(".row").append('<div id="created_div"></div>');
-    }
+    //GET IMAGE AJAX
+    $.ajax({
+        type: 'GET',
+        url: 'queryServlet',
+        data: {get_param: 'value'},
+        dataType: 'json',
+        success: function (responseJson) {
+            randomNum = Math.floor(Math.random() * ((maxImgPerRow - minImgPerRow) + 1) + minImgPerRow);
+            count = 0;
+            i=1;
+            row = 'row'+i;
+            $.each(responseJson, function (index, image) {
+                if (count <= randomNum) {
+                    $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.title + '" alt="" class="crop-img"></div>');
+                    count++;
+                } else {
+                    i++;
+                    row = 'row' + i;
+                    randomNum = Math.floor(Math.random() * (maxImgPerRow - minImgPerRow + 1)) + minImgPerRow;
+                    count = 0;
+                }
+            });
+        }
+    });
 });

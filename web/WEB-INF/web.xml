@@ -6,7 +6,11 @@
     </servlet>
     <servlet>
         <servlet-name>userAdding</servlet-name>
-        <servlet-class>io.userAdding</servlet-class>
+        <servlet-class>io.UserAdding</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImageQuerying</servlet-name>
+        <servlet-class>io.ImageQuerying</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>imageSaving</servlet-name>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>userAdding</servlet-name>
         <url-pattern>/userAdding</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageQuerying</servlet-name>
+        <url-pattern>/ImageQuerying</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
