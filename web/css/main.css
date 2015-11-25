@@ -377,12 +377,16 @@ nav.side:hover {
     cursor: pointer;
 }
 
+.item:hover {
+    overflow: visible;
+}
+
 .crop-img {
     max-height: 100%;
     position: relative;
     left: 100%;
     margin-left: -200%;
-    height:100%;
+    height: 100%;
 }
 
 footer {
@@ -404,17 +408,24 @@ footer {
 }
 
 .popup-close {
-    height: 10%;
+    height: 5%;
     width: 100%;
 }
 
 .popup-content {
-    height: 90%;
+    height: 95%;
     width: 100%;
+}
+
+.flex-center {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .input-file {
@@ -430,4 +441,67 @@ label.upload-btn {
     padding: 10px 30px;
     border: 1px solid #3B3C3D;
     font-weight: 600
+}
+
+.gallery {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 80vh;
+    background-color: #FEFEFE;
+    box-shadow: 0 0 20px #000000;
+    z-index: 1000;
+    visibility: hidden;
+}
+
+.gallery .img-container {
+    height: 70%;
+    width: 100%;
+    position: relative;
+    background-color: #6C7A89;
+}
+
+.gallery .img {
+    max-height: 70%;
+    height: 70%;
+}
+
+.gallery .img-data {
+    width: 100%;
+    height: 30%;
+    display: inline-block;
+}
+
+.img-data .comment-section {
+    width: 70%;
+    float: left;
+    height: 100%;
+}
+
+.img-data .vote-section {
+    width: 30%;
+    height: 100%;
+    float: right;
+    position: relative;
+}
+
+.scroll-y {
+    overflow-y: scroll;
+}
+
+.vote-btn {
+    position: absolute;
+    bottom: 20px;
+    border: 1px solid black;
+    padding: 10px 30px;
+    background-color: #fff;
+}
+
+#points {
+    font-size: 20px;
+    color: red;
+    height: 60px;
+    text-align: center;
 }

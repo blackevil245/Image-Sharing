@@ -159,5 +159,4 @@ public class Image implements Serializable {
     public String toString() {
         return "model.Image[ id=" + id + " ]";
     }
-    
 }

@@ -32,6 +32,11 @@ $("#closeRegisterPopup").click(function () {
     $("#popupRegisterWindow").css("visibility", "hidden");
 });
 
+$("#closeGallery").click(function () {
+    "use strict";
+    $("#gallery").css("visibility", "hidden");
+});
+
 var minImgPerRow = 7;
 var maxImgPerRow = 9;
 var randomNum;
@@ -44,16 +49,18 @@ $(document).ready(function (i) {
     $.ajax({
         type: 'GET',
         url: 'queryServlet',
-        data: {get_param: 'value'},
+        data: {
+            get_param: 'value'
+        },
         dataType: 'json',
         success: function (responseJson) {
             randomNum = Math.floor(Math.random() * ((maxImgPerRow - minImgPerRow) + 1) + minImgPerRow);
             count = 0;
-            i=1;
-            row = 'row'+i;
+            i = 1;
+            row = 'row' + i;
             $.each(responseJson, function (index, image) {
                 if (count <= randomNum) {
-                    $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.title + '" alt="" class="crop-img"></div>');
+                    $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.title + '" alt="" onclick="showGallery(this.src)" class="crop-img"></div>');
                     count++;
                 } else {
                     i++;
@@ -65,3 +72,9 @@ $(document).ready(function (i) {
         }
     });
 });
+
+function showGallery(path) {
+    "use strict";
+    $("#gallery").css("visibility", "visible");
+    $("#galleryImg").attr('src', path);
+}

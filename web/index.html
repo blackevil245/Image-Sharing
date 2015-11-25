@@ -40,11 +40,11 @@
             <div class="popup-close">
                 <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeUploadPopup"></div>
             </div>
-            <div class="popup-content">
+            <div class="popup-content flex-center flex-column">
                 <form action="uploadServlet" method="POST" enctype="multipart/form-data">
                     <input type="file" id="file" name="upload-image" multiple accept="image/*">
                     <!--<label for="file" class="upload-btn"></label>-->
-                    <input type="submit" value="Upload" />
+                    <input type="submit" value="Upload" id="submit-upload" />
                 </form>
                 <p>Maximum file size: 20Mb</p>
             </div>
@@ -54,7 +54,7 @@
             <div class="popup-close">
                 <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeSigninPopup"></div>
             </div>
-            <div class="popup-content">
+            <div class="popup-content flex-center flex-column">
                 <form action="loginServlet" method="post">
                     <input type="text" id="username" placeholder="Username">
                     <br>
@@ -72,7 +72,7 @@
             <div class="popup-close">
                 <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeRegisterPopup"></div>
             </div>
-            <div class="popup-content">
+            <div class="popup-content flex-center flex-column">
                 <form action="">
                     <input type="text" placeholder="Username">
                     <br>
@@ -87,9 +87,36 @@
             </div>
         </div>
 
+        <div class="gallery" id="gallery">
+            <div class="popup-close">
+                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeGallery"></div>
+                <center style="width:30%;position:relative;left:50%;transform:translateX(-50%);">
+                    <p style="text-align:center;" id="imgTitle" />
+                </center>
+            </div>
+            <div class="popup-content">
+                <div class="img-container flex-center">
+                    <img src="" alt="" class="img" id="galleryImg">
+                </div>
+                <div class="img-data">
+                    <div class="comment-section scroll-y">
+
+                    </div>
+                    <div class="vote-section">
+                        <center>
+                            <p style="font-size:25px;">Points</p>
+                        </center>
+                        <p id="points">30</p>
+                        <button class="fa fa-arrow-up vote-btn" style="left: 90px;" id="upvote" />
+                        <button class="fa fa-arrow-down vote-btn" style="right: 90px;" id="downvote" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <section class="content-wrapper">
             <div class="row wrapper" id="row1">
-                
+
             </div>
             <div class="row wrapper" id="row2">
 
