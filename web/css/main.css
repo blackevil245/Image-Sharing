@@ -1,13 +1,3 @@
-/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
-
-
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
@@ -365,7 +355,15 @@ nav.side:hover {
     margin: 0 30px;
 }
 
-p.sorting-phrase {}
+p.sorting-phrase {
+    font-size: 20px;
+}
+
+#sort1 > option {
+    background-color: black;
+}
+
+p.sorting-phrase > #sort2 {}
 
 .content-wrapper > .row {
     height: 250px;
@@ -383,7 +381,21 @@ p.sorting-phrase {}
     cursor: pointer;
 }
 
-.item-overlay {}
+.item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    font-size: 40px;
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
 
 .crop-img {
     max-height: 100%;
@@ -391,6 +403,7 @@ p.sorting-phrase {}
     left: 100%;
     margin-left: -200%;
     height: 100%;
+    z-index: 40;
 }
 
 .popup-wrapper {

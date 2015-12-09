@@ -53,12 +53,14 @@ public class ImageSaving extends HttpServlet {
                 if (row > 0) {
                     message = "File uploaded and saved into database";
                 }
+                response.sendRedirect(request.getHeader("Referer"));
 
             } catch (Exception e) {
                 response.setContentType("text/plain");
                 response.setCharacterEncoding("UTF-8");
                 out.println("ERROR --> " + e.getMessage());
             } finally {
+                //out.print(message);
                 out.close();
             }
         }

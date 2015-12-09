@@ -8,15 +8,14 @@ var count;
 var jsonFile;
 
 $(document).ready(function () {
-
-    //UPLOAD FORM RESPONSE AJAX
-    $('#uploadForm').submit(function (e) {
-        $.get($(this).attr("action"), $(this).serialize(), function (data) {
-            window.location.href = "http://192.168.56.1:8080/Image_Sharing/";
-        });
-        return true;
-    });
-
+    //    //UPLOAD FORM RESPONSE AJAX
+    //    $('#uploadForm').submit(function (e) {
+    //        $.get($(this).attr("action"), $(this).serialize(), function (data) {
+    //            window.location.href = "http://192.168.56.1:8080/Image_Sharing/";
+    //            notify(data);
+    //        });
+    //        return true;
+    //    });
     //LOGIN FORM RESPONSE AJAX
     $('#loginForm').submit(function (e) {
         $.get($(this).attr("action"), $(this).serialize(), function (data) {
@@ -88,7 +87,7 @@ function generateLayout(responseJson) {
     row = 'row' + i;
     $.each(responseJson, function (index, image) {
         if (count <= randomNum) {
-            $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.imagePath + '" alt="" onclick="showGallery(this.src)" class="crop-img"></div>');
+            $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.imagePath + '" alt="" onclick="showGallery(this.src)" class="crop-img" data-title="' + image.title + '"></div>');
             count++;
         } else {
             i++;
