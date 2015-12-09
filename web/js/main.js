@@ -5,6 +5,7 @@ var maxImgPerRow;
 var randomNum;
 var row;
 var count;
+var jsonFile;
 
 $(document).ready(function () {
 
@@ -42,9 +43,17 @@ $(document).ready(function () {
         },
         dataType: 'json',
         success: function (responseJson) {
+            jsonFile = responseJson;
             console.log(responseJson);
-            generateLayout(responseJson);
+            generateLayout(jsonFile);
         }
+    });
+
+    //WINDOW RESIZE EVENT
+    $(window).resize(function () {
+        $('.content-wrapper').empty()
+        $('.content-wrapper').append('<div class="row wrapper" id="row1"></div>');
+        generateLayout(jsonFile);
     });
 });
 
@@ -73,7 +82,7 @@ function detectClientWidth() {
 
 function generateLayout(responseJson) {
     detectClientWidth();
-    randomNum = Math.floor(Math.random() * ((maxImgPerRow - minImgPerRow) + 1) + minImgPerRow);
+    randomNum = Math.floor(Math.random() * ((maxImgPerRow - minImgPerRow) + 1) + minImgPerRow) - 1;
     count = 0;
     var i = 1;
     row = 'row' + i;
