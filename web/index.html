@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html class="no-js" lang="">
 
 <head>
@@ -24,7 +24,7 @@
 
     <!-- Add your site or application content here -->
     <header class="wrapper">
-        <img src="img/logo.png" alt="" class="logo center-vertical" onclick="notify('abcsd')">
+        <img src="img/logo.png" alt="" class="logo center-vertical">
         <div class="center-vertical" id="right-panel">
             <a href="#" class="button" id="uploadButton"><i class="fa fa-cloud-upload" style="font-size:1.8em;margin-right:5px;"></i> <span>Upload</span></a>
             <a href="#" class="button" id="signinButton"><i class="fa fa-sign-in" style="font-size:1.8em;margin-right:5px"></i><span>Sign in</span></a>
@@ -40,7 +40,7 @@
 
         <div class="popup-wrapper" id="popupUploadWindow">
             <div class="popup-content flex-center flex-column">
-                <form action="uploadServlet" method="post" enctype="multipart/form-data" id="uploadForm">
+                <form action="uploadServlet" method="post" enctype="multipart/form-data" id="uploadForm" class="info-form">
                     <center>
                         <input type="text" id="image-title" name="image-title" accept="text/plain" required placeholder="Title">
                     </center>
@@ -88,27 +88,28 @@
         </div>
 
         <div class="gallery" id="gallery">
-            <div class="popup-close">
-                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeGallery"></div>
-                <center style="width:30%;position:relative;left:50%;transform:translateX(-50%);">
-                    <p style="text-align:center;" id="imgTitle" />
-                </center>
-            </div>
-            <div class="popup-content">
+            <div class="gallery-wrapper">
                 <div class="img-container flex-center">
-                    <img src="" alt="" class="img" id="galleryImg">
+                    <img src="" alt="" id="galleryImg">
                 </div>
                 <div class="img-data">
-                    <div class="comment-section">
+                    <div class="close-gallery"><span class="fa fa-close" id="closeGallery" style="font-size:27px;"></span></div>
+                    <div class="data-section">
+                        <p style="font-size:25px" id="image-title">Title</p>
+                        <p style="font-size:15px" id="image-date">Date created</p>
+                        <p id="image-owner">Owner</p>
+                        <p id="image-point">Points</p>
+                        <div class="vote-panel">
+                            <button class="vote-btn fa fa-arrow"><span class="fa fa-arrow-up"></span></button>
+                            <button class="vote-btn"><span class="fa fa-arrow-down"></span></button>
+                        </div>
 
                     </div>
-                    <div class="vote-section">
-                        <center>
-                            <p style="font-size:25px;">Points</p>
-                        </center>
-                        <p id="points">30</p>
-                        <button class="fa fa-arrow-up vote-btn" style="left: 90px;" id="upvote" />
-                        <button class="fa fa-arrow-down vote-btn" style="right: 90px;" id="downvote" />
+                    <div class="comment-section">
+                        <form action="" style="height:20%;">
+                            <input type="text" placeholder="Comment">
+                            <input type="submit" value="Post">
+                        </form>
                     </div>
                 </div>
             </div>

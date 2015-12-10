@@ -8,14 +8,7 @@ var count;
 var jsonFile;
 
 $(document).ready(function () {
-    //    //UPLOAD FORM RESPONSE AJAX
-    //    $('#uploadForm').submit(function (e) {
-    //        $.get($(this).attr("action"), $(this).serialize(), function (data) {
-    //            window.location.href = "http://192.168.56.1:8080/Image_Sharing/";
-    //            notify(data);
-    //        });
-    //        return true;
-    //    });
+
     //LOGIN FORM RESPONSE AJAX
     $('#loginForm').submit(function (e) {
         $.get($(this).attr("action"), $(this).serialize(), function (data) {
@@ -50,7 +43,7 @@ $(document).ready(function () {
 
     //WINDOW RESIZE EVENT
     $(window).resize(function () {
-        $('.content-wrapper').empty()
+        $('.content-wrapper').empty();
         $('.content-wrapper').append('<div class="row wrapper" id="row1"></div>');
         generateLayout(jsonFile);
     });
@@ -87,7 +80,7 @@ function generateLayout(responseJson) {
     row = 'row' + i;
     $.each(responseJson, function (index, image) {
         if (count <= randomNum) {
-            $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.imagePath + '" alt="" onclick="showGallery(this.src)" class="crop-img" data-title="' + image.title + '"></div>');
+            $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.imagePath + '" alt="" onclick="showGallery(this.src, this.data-title, this.data-date)" class="crop-img" data-date="' + image.dateCreated + '" data-title="' + image.title + '"><div class="item-overlay"><p>' + image.title + '</p></div></div>');
             count++;
         } else {
             i++;
@@ -107,8 +100,9 @@ function notify(message) {
     }, 2500);
 };
 
-function showGallery(path) {
-    "use strict";
+function showGallery(path, title, date) {
     $("#gallery").css("visibility", "visible");
     $("#galleryImg").attr('src', path);
+    $("#image-title").text(title);
+    $("#image-date").text(date);
 };

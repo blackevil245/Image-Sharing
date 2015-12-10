@@ -359,11 +359,12 @@ p.sorting-phrase {
     font-size: 20px;
 }
 
-#sort1 > option {
-    background-color: black;
+#sort1 > option,
+#sort1 > selected,
+#sort2 > option,
+#sort2 > selected {
+    background-color: #fff;
 }
-
-p.sorting-phrase > #sort2 {}
 
 .content-wrapper > .row {
     height: 250px;
@@ -379,22 +380,24 @@ p.sorting-phrase > #sort2 {}
     position: relative;
     text-align: center;
     cursor: pointer;
+    overflow-y: hidden;
 }
 
 .item-overlay {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 50;
+    height: 30%;
     font-size: 40px;
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    transform: translateY(100%);
+    background: linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%, rgba(0, 0, 0, 0.65) 101%);
+    background-color: brown;
+    transition: transform .2s ease-in-out;
+}
+
+.item-overlay > p {
+    font-size: 10px;
 }
 
 .crop-img {
@@ -403,7 +406,6 @@ p.sorting-phrase > #sort2 {}
     left: 100%;
     margin-left: -200%;
     height: 100%;
-    z-index: 40;
 }
 
 .popup-wrapper {
@@ -474,47 +476,91 @@ label.upload-btn {
     width: 90vw;
     height: 80vh;
     background-color: #FEFEFE;
-    box-shadow: 0 0 20px #000000;
+    box-shadow: 0 0 5px #000000;
     z-index: 1000;
     visibility: hidden;
 }
 
-.gallery .img-container {
-    height: 90%;
-    position: relative;
-    background-color: #6C7A89;
+.gallery-wrapper {
+    height: 100%;
+    width: 100%;
 }
 
-.gallery .img {
-    max-height: 70%;
-    height: 70%;
+.gallery .img-container {
+    background-color: #3B3B3B;
+    height: 100%;
+    width: 70%;
+    float: left;
+    position: relative;
+}
+
+#galleryImg {
+    max-height: 100%;
+    width: 80%;
 }
 
 .gallery .img-data {
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+.img-data .close-gallery {
     width: 100%;
-    height: 30%;
-    display: inline-block;
+    height: 5%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .img-data .comment-section {
-    width: 70%;
-    float: left;
-    height: 100%;
-}
-
-.img-data .vote-section {
-    width: 30%;
-    height: 100%;
-    float: right;
+    width: 100%;
+    height: 60%;
     position: relative;
 }
 
-.vote-btn {
-    position: absolute;
-    bottom: 20px;
+
+/*
+.img-data .comment-section input[type='text'] {
+    width: 70%;
+    min-height: 50%;
+    margin-left: 5%;
+    float: left;
+}
+
+.img-data .comment-section input[type='submit'] {
+    width: 20%;
+    height: 60%;
+    float: left;
+    background-color: inherit;
     border: 1px solid black;
-    padding: 10px 30px;
-    background-color: #fff;
+    margin-left: 3px;
+}
+*/
+
+.data-section {
+    width: 100%;
+    height: 35%;
+    position: relative;
+}
+
+.data-section > p {
+    margin: 10px 0 0 10px;
+}
+
+.vote-panel {
+    width: 60px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-100%);
+    display: flex;
+}
+
+.vote-btn {
+    padding: 3px 20px;
+    background-color: inherit;
+    color: black;
+    border: 1px solid black
 }
 
 #points {
