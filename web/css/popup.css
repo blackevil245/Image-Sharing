@@ -1,0 +1,155 @@
+
+
+#popup-content {
+    background-color: #fff;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+    border-radius: 15px;
+    color:black;
+    display: none;
+	max-width: 600px;
+    padding: 0 10px 10px 10px;
+    position:fixed;
+    z-index: 1002;
+    width: 65%;
+	border: 1px solid black;
+	height: 500px;
+}
+
+#popup-content h2{
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px;
+	text-align: center
+}
+
+#popup-content >div + div{
+    text-align: right;
+}
+#commentclass {
+    margin: 10px;
+    height: auto;
+    width: auto;
+    color: #444;
+	position:relative;
+
+   
+}
+p.title {
+    height: 40px;
+    line-height: 37px;
+    font-size: 14px;
+    margin: 0 5px 0 5px;
+    color: #333;
+    border-bottom: 1px solid #555;
+}
+.comment-list {
+    height: auto;
+    font-size: 13px;
+    margin: 10px 5px 5px 5px;
+    color: #555;
+}
+
+ul.comment-holder-ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+ul.comment-holder-ul li.comment-holder{
+    list-style-type: none;
+    background: "#fffff5";
+    height: auto;
+    width: auto;
+    margin: 5px 0 5px 0;
+    border: 1px solid #e1e1e1;
+    overflow: hidden;
+}
+
+ul.comment-holder-ul li.comment-holder:hover {
+    background: #ffffdb;
+}
+
+.comment-body {
+    width: auto;
+}
+
+ul.comment-holder-ul li.comment-holder h3.username-field{
+    
+    height: 25px;
+    line-height: 27px;
+    color: #2E5CB8;
+    font-size: 11px;
+    margin: 0 0 0 10px;
+}
+
+ul.comment-holder-ul li.comment-holder .comment-text {
+display: block;
+width: auto;
+font-size: 13px;
+margin: 0 10px 10px 10px; 
+}
+
+.comment-post-btn-wrapper {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	width: 60px;
+	height: 25px;
+	line-height: 22px;
+	background-color: #6989CC;
+	color: #ffffff;
+	font-size: 14px;
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid #fff;
+
+}
+.comment-post-btn-wrapper:hover {
+	background: #6989CC;
+	color: #eaeaea;
+	border: 1px solid #a1a1a1;
+}
+.comment-insert {
+    height: 90px;
+    width: auto;
+    margin: 5px;
+    border: 1px solid #e1e1e1;
+	position: relative;
+}
+
+.comment-insert h3.who-says {
+    height: 35px;
+    line-height: 30px;
+    color: #2E5CB8;
+    font-size: 12px;
+    width: auto;
+    margin: 0 10px 0 10px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.comment-insert .comment-insert-container:hover {
+	border: 1px solid #c1c1c1;
+}
+.comment-insert textarea.comment-insert-text {
+    margin: 5px 5px 10px 3px;
+    border: none;
+    width: 98%;
+    height: 100%;
+}
+#modal-close-button {
+	position:absolute;
+	top: 5px;
+	right: 10px;
+	width: 25px;
+	height: 25px;
+	
+}
+#clickMe {
+	width: 50px;
+	 margin: 10px 10px 10px 10px;
+        
+}

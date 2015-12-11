@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html class="no-js" lang="">
 
 <head>
@@ -14,6 +14,12 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/popup.css">
+       
+        
+
+
+   
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -23,45 +29,40 @@
             <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header class="wrapper">
+    <header>
         <img src="img/logo.png" alt="" class="logo center-vertical">
         <div class="center-vertical" id="right-panel">
-            <a href="#" class="button" id="uploadButton"><i class="fa fa-cloud-upload" style="font-size:1.8em;"></i></a>
-            <a href="#" class="button" id="signinButton">Sign in</a>
+            <a href="#" class="button" id="uploadButton"><i class="fa fa-cloud-upload" style="font-size:1.8em;margin-right:5px;"></i> <span>Upload</span></a>
+            <a href="#" class="button" id="signinButton"><i class="fa fa-sign-in" style="font-size:1.8em;margin-right:5px"></i><span>Sign in</span></a>
         </div>
     </header>
 
     <main class="wrapper">
-        <nav class="side">
-            <i class="fa fa-arrow-right" style="position:absolute; right:0;top:50%;transform:translateY(-50%);font-size:20px; color:#3B3C3D;"></i>
-        </nav>
-
         <div class="popup-wrapper" id="popupUploadWindow">
-            <div class="popup-close">
-                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeUploadPopup"></div>
-            </div>
             <div class="popup-content flex-center flex-column">
-                <form action="uploadServlet" method="POST" enctype="multipart/form-data">
-                    <input type="file" id="file" name="upload-image" multiple accept="image/*">
-                    <!--<label for="file" class="upload-btn"></label>-->
-                    <input type="submit" value="Upload" id="submit-upload" />
+                <form action="uploadServlet" method="post" enctype="multipart/form-data" id="uploadForm" class="info-form">
+                    <center class="input-field">
+                        <input type="text" id="image-title" name="image-title" accept="text/plain" required placeholder="Title">
+                    </center>
+                    <center class="input-field">
+                        <input type="file" id="file" name="upload-image" accept="image/*" required>
+                    </center>
+                    <center class="input-field">
+                        <input type="submit" value="Upload" id="submit-upload" />
+                    </center>
                 </form>
-                <p>Maximum file size: 20Mb</p>
             </div>
         </div>
 
         <div class="popup-wrapper" id="popupLoginWindow">
-            <div class="popup-close">
-                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeSigninPopup"></div>
-            </div>
             <div class="popup-content flex-center flex-column">
-                <form action="loginServlet" method="post">
-                    <input type="text" id="username" placeholder="Username">
+                <form action="loginServlet" method="get" id="loginForm">
+                    <input type="text" id="username" placeholder="Username" name="login-username" required>
                     <br>
-                    <input type="text" id="password" placeholder="Password" style="margin-top:5px;">
+                    <input type="password" id="password" placeholder="Password" name="login-password" style="margin-top:5px;" required>
                     <br>
                     <center>
-                        <input type="submit" id="Login" value="Login" style="margin-top:10px;">
+                        <input type="submit" id="Login" value="Login" class="authentication_submit" style="margin-top:10px;" required>
                     </center>
                 </form>
                 <a style="margin-top:10px;text-decoration:none;cursor:pointer;" id="register">Register</a>
@@ -69,76 +70,123 @@
         </div>
 
         <div class="popup-wrapper" id="popupRegisterWindow">
-            <div class="popup-close">
-                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeRegisterPopup"></div>
-            </div>
             <div class="popup-content flex-center flex-column">
-                <form action="">
-                    <input type="text" placeholder="Username">
+                <form action="registerServlet" id="registerForm" method="get">
+                    <input type="text" name="username" placeholder="Username" required>
                     <br>
-                    <input type="text" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" required>
                     <br>
-                    <input type="text" placeholder="Re-type password">
+                    <input type="password" name="retype-password" placeholder="Re-type password" required>
                     <br>
                     <center>
-                        <input type="submit" value="Register">
+                        <input type="submit" value="Register" class="authentication_submit">
                     </center>
                 </form>
             </div>
         </div>
 
         <div class="gallery" id="gallery">
-            <div class="popup-close">
-                <div class="fa fa-close" style="float:right;margin-right:10px;font-size:25px" id="closeGallery"></div>
-                <center style="width:30%;position:relative;left:50%;transform:translateX(-50%);">
-                    <p style="text-align:center;" id="imgTitle" />
-                </center>
-            </div>
-            <div class="popup-content">
+            <div class="gallery-wrapper">
                 <div class="img-container flex-center">
-                    <img src="" alt="" class="img" id="galleryImg">
+                    <img src="" alt="" id="galleryImg">
                 </div>
                 <div class="img-data">
-                    <div class="comment-section scroll-y">
+                    <div class="close-gallery"><span class="fa fa-close" id="closeGallery" style="font-size:27px;"></span></div>
+                    <div class="data-section">
+                        <p style="font-size:25px" id="title">Title</p>
+                        <p style="font-size:15px" id="image-date">Date created</p>
+                        <p id="image-owner">Owner</p>
+                        <p id="image-point">Points</p>
+                        <div class="vote-panel">
+                            <button class="vote-btn fa fa-arrow"><span class="fa fa-arrow-up"></span></button>
+                            <button class="vote-btn"><span class="fa fa-arrow-down"></span></button>
+                        </div>
 
                     </div>
-                    <div class="vote-section">
-                        <center>
-                            <p style="font-size:25px;">Points</p>
-                        </center>
-                        <p id="points">30</p>
-                        <button class="fa fa-arrow-up vote-btn" style="left: 90px;" id="upvote" />
-                        <button class="fa fa-arrow-down vote-btn" style="right: 90px;" id="downvote" />
-                    </div>
+					 <p><img src='messages.png' alt='Click to see comments' id='clickMe'/>Comments</p> 
+					<div id="popup-content">
+                    <div class="comment-section scroll-y" id="commentclass">
+    <div>
+    <h2>Comments</h2>
+		
+		 <div class="comment-insert">
+                        <h3 class = "who-says"> <span> Says:</span>Matti Meikäläinen</h3>
+                            <div class="comment-insert-container">
+							<form action="commentingServlet" style="height:20%;" id="usrform" method="get">
+							<input type="submit" value="Post" class="comment-post-btn-wrapper" id="comment-post-btn">
+							</form>
+                            <textarea id="comment-post-text" class="comment-insert-text" form="usrform"></textarea>
+                            </div>
+                         
+                            
+                        </div>
+		  <div class="comment-list">
+                        <ul class="comment-holder-ul">
+                            <li class="comment-holder" id="_1">
+                                
+                            <div class="comment-body">   
+                            <h3 class="username-field">
+                                Matti Meikäläinen
+                                </h3>
+                            <div class="comment-text">
+                                Comments will appear
+                            </div>
+                            </div> 
+                            </li>
+							<li class="comment-holder" id="_1">
+                                
+                            <div class="comment-body">   
+                            <h3 class="username-field">
+                                Matti Meikäläinen
+                                </h3>
+                            <div class="comment-text">
+                                Comments will appear
+                            </div>
+                            </div> 
+                            </li>
+							
+
+                        
+
+		
+		
+    
+    </div>
+    <div> <input id="modal-close-button" type="button" value="X"/></div>
+    </div>
+	</div>
+	</div>
                 </div>
             </div>
         </div>
 
+        <section class="wrapper">
+            <center>
+                <p class="sorting-phrase">I want to see
+                    <span>
+               <select name="" id="sort1">
+                <option value="" selected>new</option>
+                <option value="">popular</option>
+            </select>
+            </span> images sorted by
+                    <span>
+                <select name="" id="sort2">
+                 <option value="" selected>time</option>
+                 <option value="">point</option>
+             </select>
+             </span></p>
+            </center>
+        </section>
+
+
         <section class="content-wrapper">
-            <div class="row wrapper" id="row1">
+            <div class="row wrapper" id="row0"></div>
+        </section>
 
-            </div>
-            <div class="row wrapper" id="row2">
-
-            </div>
-
-            <div class="row wrapper" id="row3">
-
-            </div>
-
-            <div class="row wrapper" id="row4">
-
-            </div>
-
-            <div class="row wrapper" id="row5">
-
-            </div>
+        <section class="notification">
+            <p id="notification-text">abcd</p>
         </section>
     </main>
-
-    <footer class="wrapper">
-        <p id="jsonData"></p>
-    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
@@ -146,6 +194,8 @@
     </script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/UX.js"></script>
+    <script src="js/popup.js"></script>  
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
