@@ -8,6 +8,7 @@ package io;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +34,7 @@ public class ImageQuerying extends HttpServlet {
             em = emf.createEntityManager();
             
             List<Image> images = em.createNamedQuery("Image.findAll").getResultList();
+            Collections.reverse(images);
                     
             String json = new Gson().toJson(images);
 

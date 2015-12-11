@@ -23,7 +23,7 @@
             <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header class="wrapper">
+    <header>
         <img src="img/logo.png" alt="" class="logo center-vertical">
         <div class="center-vertical" id="right-panel">
             <a href="#" class="button" id="uploadButton"><i class="fa fa-cloud-upload" style="font-size:1.8em;margin-right:5px;"></i> <span>Upload</span></a>
@@ -32,36 +32,28 @@
     </header>
 
     <main class="wrapper">
-        <!--
-        <nav class="side">
-    <i class="fa fa-arrow-right" style="position:absolute; right:0;top:50%;transform:translateY(-50%);font-size:20px; color:#3B3C3D;"></i>
-</nav>
--->
-
         <div class="popup-wrapper" id="popupUploadWindow">
             <div class="popup-content flex-center flex-column">
                 <form action="uploadServlet" method="post" enctype="multipart/form-data" id="uploadForm" class="info-form">
-                    <center>
+                    <center class="input-field">
                         <input type="text" id="image-title" name="image-title" accept="text/plain" required placeholder="Title">
                     </center>
-                    <center>
+                    <center class="input-field">
                         <input type="file" id="file" name="upload-image" accept="image/*" required>
                     </center>
-                    <!--<label for="file" class="upload-btn"></label>-->
-                    <center>
+                    <center class="input-field">
                         <input type="submit" value="Upload" id="submit-upload" />
                     </center>
                 </form>
-                <p>Maximum file size: 20Mb</p>
             </div>
         </div>
 
         <div class="popup-wrapper" id="popupLoginWindow">
             <div class="popup-content flex-center flex-column">
                 <form action="loginServlet" method="get" id="loginForm">
-                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="text" id="username" placeholder="Username" name="login-username" required>
                     <br>
-                    <input type="text" id="password" placeholder="Password" style="margin-top:5px;" required>
+                    <input type="password" id="password" placeholder="Password" name="login-password" style="margin-top:5px;" required>
                     <br>
                     <center>
                         <input type="submit" id="Login" value="Login" style="margin-top:10px;" required>
@@ -95,7 +87,7 @@
                 <div class="img-data">
                     <div class="close-gallery"><span class="fa fa-close" id="closeGallery" style="font-size:27px;"></span></div>
                     <div class="data-section">
-                        <p style="font-size:25px" id="image-title">Title</p>
+                        <p style="font-size:25px" id="title">Title</p>
                         <p style="font-size:15px" id="image-date">Date created</p>
                         <p id="image-owner">Owner</p>
                         <p id="image-point">Points</p>
@@ -135,7 +127,7 @@
 
 
         <section class="content-wrapper">
-            <div class="row wrapper" id="row1"></div>
+            <div class="row wrapper" id="row0"></div>
         </section>
 
         <section class="notification">

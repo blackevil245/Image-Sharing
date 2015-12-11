@@ -44,28 +44,39 @@ $(document).ready(function () {
     //WINDOW RESIZE EVENT
     $(window).resize(function () {
         $('.content-wrapper').empty();
-        $('.content-wrapper').append('<div class="row wrapper" id="row1"></div>');
+        $('.content-wrapper').append('<div class="row wrapper" id="row0"></div>');
         generateLayout(jsonFile);
+    });
+
+    //READER IMAGE META DATA
+    $("#file").change(function (e) {
+        if (this.disabled) return alert('File upload not supported!');
+        var F = this.files;
+        if (F && F[0])
+            for (var i = 0; i < F.length; i++) readImage(F[i]);
     });
 });
 
 function detectClientWidth() {
     var clientWidth = document.documentElement.clientWidth;
-    if (clientWidth <= 600) {
+    if (clientWidth >= 0 && clientWidth <= 600) {
         minImgPerRow = 1;
+        maxImgPerRow = 1;
+    } else if (clientWidth >= 601 && clientWidth <= 800) {
+        minImgPerRow = 2;
         maxImgPerRow = 2;
-    } else if (clientWidth <= 800) {
+    } else if (clientWidth >= 801 && clientWidth <= 1000) {
         minImgPerRow = 2;
         maxImgPerRow = 3;
-    } else if (clientWidth <= 1000) {
+    } else if (clientWidth >= 1001 && clientWidth <= 1300) {
+        minImgPerRow = 3;
+        maxImgPerRow = 3;
+    } else if (clientWidth >= 1301 && clientWidth <= 1600) {
         minImgPerRow = 4;
         maxImgPerRow = 5;
-    } else if (clientWidth <= 1600) {
+    } else if (clientWidth >= 1601) {
         minImgPerRow = 4;
-        maxImgPerRow = 6;
-    } else {
-        minImgPerRow = 5;
-        maxImgPerRow = 7;
+        maxImgPerRow = 5;
     }
     console.log(clientWidth);
     console.log(minImgPerRow);
@@ -74,13 +85,13 @@ function detectClientWidth() {
 
 function generateLayout(responseJson) {
     detectClientWidth();
-    randomNum = Math.floor(Math.random() * ((maxImgPerRow - minImgPerRow) + 1) + minImgPerRow) - 1;
+    randomNum = Math.floor(Math.random() * ((maxImgPerRow - minImgPerRow) + 1) + minImgPerRow);
     count = 0;
-    var i = 1;
+    var i = 0;
     row = 'row' + i;
     $.each(responseJson, function (index, image) {
-        if (count <= randomNum) {
-            $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.imagePath + '" alt="" onclick="showGallery(this.src, this.data-title, this.data-date)" class="crop-img" data-date="' + image.dateCreated + '" data-title="' + image.title + '"><div class="item-overlay"><p>' + image.title + '</p></div></div>');
+        if (count < randomNum) {
+            $('#' + row).append('<div class="item"><img src="http://192.168.56.1/image/' + image.imagePath + '" alt="" onclick="showGallery(this)" class="crop-img" data-date="' + image.dateCreated + '" data-title="' + image.title + '"><div class="item-overlay"><p>' + image.title + '</p></div></div>');
             count++;
         } else {
             i++;
@@ -100,9 +111,25 @@ function notify(message) {
     }, 2500);
 };
 
-function showGallery(path, title, date) {
+function showGallery(obj) {
     $("#gallery").css("visibility", "visible");
-    $("#galleryImg").attr('src', path);
-    $("#image-title").text(title);
-    $("#image-date").text(date);
+    $("#galleryImg").attr('src', $(obj).attr('src'));
+    $("#title").text($(obj).attr('data-title'));
+    $("#image-date").text($(obj).attr('data-date'));
+};
+
+function readImage(file) {
+    var reader = new FileReader();
+    var image = new Image();
+
+    reader.readAsDataURL(file);
+    reader.onload = function (_file) {
+        image.src = _file.target.result;
+        image.onload = function () {
+            $('uploadForm').append('<p>' + this.width + '</p>')
+        };
+        image.onerror = function () {
+            alert('Invalid file type: ' + file.type);
+        };
+    };
 };

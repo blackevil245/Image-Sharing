@@ -1,3 +1,4 @@
+/*-------------------- PANEL BUTTON ------------------------*/
 $("#uploadButton").click(function (event) {
     event.stopPropagation();
     $("#popupUploadWindow").css("transform", "translateY(0%)");
@@ -21,12 +22,21 @@ $('.popup-wrapper').click(function (event) {
     event.stopPropagation();
 });
 
-$(document).on('click', function (event) {
-    $("#popupLoginWindow").css("transform", "translateY(-200%)");
-    $("#popupUploadWindow").css("transform", "translateY(-200%)");
-    $("#popupRegisterWindow").css("transform", "translateY(-200%)");
-});
+
+/*-------------------- GALLERY ------------------------*/
 
 $("#closeGallery").click(function () {
     $("#gallery").css("visibility", "hidden");
+});
+
+$('#gallery').click(function (event) {
+    event.stopPropagation();
+});
+
+/*-------------------- CLICK DOC CLOSE ------------------------*/
+$(document).on('click', function (event) {
+    event.stopPropagation();
+    $("#popupLoginWindow").css("transform", "translateY(-200%)");
+    $("#popupUploadWindow").css("transform", "translateY(-200%)");
+    $("#popupRegisterWindow").css("transform", "translateY(-200%)");
 });
