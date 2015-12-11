@@ -1,7 +1,6 @@
 package io;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,23 +15,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import model.Image;
 
 @WebServlet("/uploadServlet")
-@MultipartConfig(location = "/var/www/html", maxFileSize = 1024 * 1024 * 20)
-public class imageSaving extends HttpServlet {
+@MultipartConfig(location = "/var/www/html/img", maxFileSize = 1024 * 1024 * 20)
+public class ImageSaving extends HttpServlet {
 
     //Database settings
-    private final String dbURL = "jdbc:mysql://192.168.56.1:3306/image-sharing";
-    private final String dbUser = "admin";
-    private final String dbPass = "password";
+    private final String dbURL = "jdbc:mysql://127.0.0.1:3306/image-sharing";
+    private final String dbUser = "root";
+    private final String dbPass = "root";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InputStream inputStream = null;
         try (PrintWriter out = response.getWriter()) {
             //obtains file part of multipart request
             Part filePart = request.getPart("upload-image");
+            String imageTitle = request.getParameter("image-title");
             Connection conn = null;
             String message = null;
             try {
@@ -50,7 +47,7 @@ public class imageSaving extends HttpServlet {
                 statement.setString(1, filePart.getSubmittedFileName());
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 statement.setString(2, dateFormat.format(Calendar.getInstance().getTime()));
-                statement.setString(3, filePart.getSubmittedFileName());
+                statement.setString(3, imageTitle);
                 // sends the statement to the database server
                 int row = statement.executeUpdate();
                 if (row > 0) {
@@ -58,9 +55,10 @@ public class imageSaving extends HttpServlet {
                 }
 
             } catch (Exception e) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
                 out.println("ERROR --> " + e.getMessage());
             } finally {
-                out.println(message);
                 out.close();
             }
         }
