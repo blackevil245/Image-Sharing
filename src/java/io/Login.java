@@ -52,9 +52,9 @@ public class Login extends HttpServlet {
                     message = "User not exist";
                 } else {
                     if(password.equals(users.get(0).getPassword())) {
-                        message = "Logged In";
+                        message = "loggedin"+users.get(0).getId();
                     } else {
-                        message = "Wrong password";
+                        message = "Wrong Password";
                     }
                 }
             } catch (Exception e) {

@@ -33,7 +33,16 @@ public class ImageQuerying extends HttpServlet {
             emf = Persistence.createEntityManagerFactory("Image_SharingPU");
             em = emf.createEntityManager();
             
-            List<Image> images = em.createNamedQuery("Image.findAll").getResultList();
+            String queryOrder = request.getParameter("query_word");
+            List<Image> images = null;
+            
+            if (queryOrder.equalsIgnoreCase("all")) {
+                images = em.createNamedQuery("Image.findAll").getResultList();
+            } else if (queryOrder.contains("user")) {
+                String userID = queryOrder.substring(4);
+                images = em.createNamedQuery("Image.findById").setParameter("ownerId", userID).getResultList();
+            }
+            
             Collections.reverse(images);
                     
             String json = new Gson().toJson(images);

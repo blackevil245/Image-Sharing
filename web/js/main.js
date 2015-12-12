@@ -9,10 +9,29 @@ var jsonFile;
 
 $(document).ready(function () {
 
+    //CHECK LOGIN CACHE
+    var username = localStorage.getItem('username');
+    var password = localStorage.getItem('password');
+    if (username != null && password != null) {
+        $('#signinButton').remove();
+        $('#myAccountButton').css({
+            visibility: "visible",
+            minWidth: "33%",
+            maxWidth: "33%"
+        });
+    };
+
     //LOGIN FORM RESPONSE AJAX
     $('#loginForm').submit(function (e) {
         $.get($(this).attr("action"), $(this).serialize(), function (data) {
-            notify(data);
+            if (data.substring(0, 8) === 'loggedin') {
+                localStorage.setItem("username", $('#username').val());
+                localStorage.setItem("password", $('#password').val());
+                localStorage.setItem("userid", data.substring(8));
+                location.reload();
+            } else {
+                notify(data);
+            }
         });
         return false;
     });
@@ -25,21 +44,8 @@ $(document).ready(function () {
         return false;
     });
 
-    //GET IMAGE AJAX
-
-    $.ajax({
-        type: 'GET',
-        url: 'queryServlet',
-        data: {
-            get_param: 'value'
-        },
-        dataType: 'json',
-        success: function (responseJson) {
-            jsonFile = responseJson;
-            console.log(responseJson);
-            generateLayout(jsonFile);
-        }
-    });
+    //EXPLORE ALL IMAGE ON START
+    queryImage("all");
 
     //WINDOW RESIZE EVENT
     $(window).resize(function () {
@@ -48,14 +54,39 @@ $(document).ready(function () {
         generateLayout(jsonFile);
     });
 
-    //READER IMAGE META DATA
-    $("#file").change(function (e) {
-        if (this.disabled) return alert('File upload not supported!');
-        var F = this.files;
-        if (F && F[0])
-            for (var i = 0; i < F.length; i++) readImage(F[i]);
+    //SIGNOUT
+    $('#signOut').click(function () {
+        signOut();
+    });
+
+    //SHOW MY IMAGE
+    $('#showMyImage').click(function () {
+        queryImage('user' + localStorage.getItem("userid"));
+    });
+
+    //EXPLORE
+    $('#exploreButton').click(function () {
+        queryImage("all");
     });
 });
+
+function queryImage(query) {
+    $('.content-wrapper').empty();
+    $('.content-wrapper').append('<div class="row wrapper" id="row0"></div>');
+    $.ajax({
+        type: 'GET',
+        url: 'queryServlet',
+        data: {
+            query_word: query
+        },
+        dataType: 'json',
+        success: function (responseJson) {
+            jsonFile = responseJson;
+            console.log(responseJson);
+            generateLayout(jsonFile);
+        }
+    });
+}
 
 function detectClientWidth() {
     var clientWidth = document.documentElement.clientWidth;
@@ -118,18 +149,8 @@ function showGallery(obj) {
     $("#image-date").text($(obj).attr('data-date'));
 };
 
-function readImage(file) {
-    var reader = new FileReader();
-    var image = new Image();
-
-    reader.readAsDataURL(file);
-    reader.onload = function (_file) {
-        image.src = _file.target.result;
-        image.onload = function () {
-            $('uploadForm').append('<p>' + this.width + '</p>')
-        };
-        image.onerror = function () {
-            alert('Invalid file type: ' + file.type);
-        };
-    };
+function signOut() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    location.reload();
 };

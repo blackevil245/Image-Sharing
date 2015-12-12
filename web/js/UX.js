@@ -4,6 +4,7 @@ $("#uploadButton").click(function (event) {
     $("#popupUploadWindow").css("transform", "translateY(0%)");
     $("#popupLoginWindow").css("transform", "translateY(-200%)");
     $("#popupRegisterWindow").css("transform", "translateY(-200%)");
+    $("#popupMyAccount").css("transform", "translateY(-200%)");
 });
 
 $("#signinButton").click(function (event) {
@@ -11,6 +12,12 @@ $("#signinButton").click(function (event) {
     $("#popupLoginWindow").css("transform", "translateY(0%)");
     $("#popupUploadWindow").css("transform", "translateY(-200%)");
     $("#popupRegisterWindow").css("transform", "translateY(-200%)");
+});
+
+$("#myAccountButton").click(function (event) {
+    event.stopPropagation();
+    $("#popupUploadWindow").css("transform", "translateY(-200%)");
+    $("#popupMyAccount").css("transform", "translateY(0%)");
 });
 
 $("#register").click(function (event) {
@@ -39,4 +46,5 @@ $(document).on('click', function (event) {
     $("#popupLoginWindow").css("transform", "translateY(-200%)");
     $("#popupUploadWindow").css("transform", "translateY(-200%)");
     $("#popupRegisterWindow").css("transform", "translateY(-200%)");
+    $("#popupMyAccount").css("transform", "translateY(-200%)");
 });
