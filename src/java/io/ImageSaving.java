@@ -27,42 +27,45 @@ public class ImageSaving extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
+        Connection conn = null;
+        String message = null;
+        PrintWriter out = response.getWriter();
+        try {
             //obtains file part of multipart request
             Part filePart = request.getPart("upload-image");
             String imageTitle = request.getParameter("image-title");
-            Connection conn = null;
-            String message = null;
-            try {
-                // connects to the database
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+//            String ownerId = request.getParameter("owner-id");
+//            message = ownerId;
 
-                //Upload file to DB
-                filePart.write(filePart.getSubmittedFileName());
+            // connects to the database
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
-                // constructs SQL statement
-                String sql = "INSERT INTO IMAGE (ImagePath, DateCreated, Title) values (?, ?, ?)";
-                PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setString(1, filePart.getSubmittedFileName());
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                statement.setString(2, dateFormat.format(Calendar.getInstance().getTime()));
-                statement.setString(3, imageTitle);
-                // sends the statement to the database server
-                int row = statement.executeUpdate();
-                if (row > 0) {
-                    message = "File uploaded and saved into database";
-                }
-                response.sendRedirect(request.getHeader("Referer"));
+            //Upload file to DB
+            filePart.write(filePart.getSubmittedFileName());
 
-            } catch (Exception e) {
-                response.setContentType("text/plain");
-                response.setCharacterEncoding("UTF-8");
-                out.println("ERROR --> " + e.getMessage());
-            } finally {
-                //out.print(message);
-                out.close();
+            // constructs SQL statement
+            String sql = "INSERT INTO IMAGE (ImagePath, DateCreated, Title) values (?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, filePart.getSubmittedFileName().replaceAll("\\s","%20"));
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            statement.setString(2, dateFormat.format(Calendar.getInstance().getTime()));
+            statement.setString(3, imageTitle);
+//            statement.setInt(4, Integer.parseInt(ownerId));
+            // sends the statement to the database server
+            int row = statement.executeUpdate();
+            if (row > 0) {
+                message = "File uploaded and saved into database";
             }
+            response.sendRedirect(request.getHeader("Referer"));
+
+        } catch (Exception e) {
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            out.println("ERROR --> " + e.getMessage());
+        } finally {
+            out.print(message);
+            out.close();
         }
     }
 

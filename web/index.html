@@ -38,7 +38,10 @@
             <div class="popup-content flex-center flex-column">
                 <form action="uploadServlet" method="post" enctype="multipart/form-data" id="uploadForm" class="info-form">
                     <center class="input-field">
-                        <input type="text" id="image-title" name="image-title" accept="text/plain" required placeholder="Title">
+                        <input type="text" id="image-title" name="image-title" required placeholder="Title">
+                    </center>
+                    <center class="input-field">
+                        <input type="number" id="owner-id" hidden name="owner-id" disabled required placeholder="Owner ID">
                     </center>
                     <center class="input-field">
                         <input type="file" id="file" name="upload-image" accept="image/*" required>
